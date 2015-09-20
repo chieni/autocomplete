@@ -20,6 +20,11 @@
 	  // Instantiate your trie data type here, and load the words 
 	  // in the provided JSON dictionary (accessible as an array
 	  // stored in the variable 'WORDS') into the data structure.
+		var t = TrieNode(null);
+		WORDS.forEach(function(word){
+			t.insert(word);
+		});
+
 
 	  // After instantiating and populating your trie above, you need
 	  // to register a listener function to be called after each 
@@ -34,7 +39,6 @@
 	  // some random words from the dictionary. You'll want to populate
 	  // the list with the desired suggestions instead.
 	  CONTROLLER.registerAutocompleteListener(function (word) {
-	  	console.log(word);
 	  	// This function is called on _every_ keypress (that is,
 	  	// change to the search box). Modify this sample with your 
 	    // code to provide autocompletion suggestions.
@@ -45,16 +49,20 @@
 	  	CONTROLLER.clearSearchResults();
 
 	  	// Display the current word
-	  	CONTROLLER.appendToSearchResults(word);
+	  	//CONTROLLER.appendToSearchResults(word);
 
 	  	// Display some random words
-	  	for (i = 0; i < NUM_WORDS_TO_SHOW; ++i) {
-	  	  randomWord = WORDS[Math.floor(Math.random() * WORDS.length)];
-	  	  CONTROLLER.appendToSearchResults(randomWord);
+	  	// for (i = 0; i < NUM_WORDS_TO_SHOW; ++i) {
+	  	//   randomWord = WORDS[Math.floor(Math.random() * WORDS.length)];
+	  	//   CONTROLLER.appendToSearchResults(randomWord);
+	  	// }
+	  	var matchList = t.getMatchList(word);
+	  	if (matchList){
+		  	matchList.forEach(function(w){
+		  		CONTROLLER.appendToSearchResults(w)
+		  	})
 	  	}
-	  	
       });
-
   	});
 
   </script>

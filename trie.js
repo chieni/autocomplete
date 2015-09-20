@@ -55,14 +55,41 @@ var TrieNode = function(key, value) {
 		}
 	}
 
+	/*
+	Find the correct node in the Trie structure, then use preorder traversal on it.
+	*/
 	that.getMatchList = function(word){
-		var matchNode = find(word);
+		var matchNode = this.find(word);
 		if (matchNode){
-			var matchChildren = matchNode.
-
+			var matchChildren = matchNode.preOrderTraversal();
+			if (matchChildren.length > 10){
+				return matchChildren.slice(0, 10);
+			}
+			return matchChildren;
 		} else {
 			return null;
 		}
+	}
+
+	/*
+	If node has a value, add to list. Sort children by alphabetical order. 
+	Call preOrderTraversal on the children
+	*/
+	that.preOrderTraversal = function(){
+		var visited = [];
+		if (value) {
+			visited.push(key);
+		}
+
+		children.sort(function(a, b){
+			return a.key().localeCompare(b.key());
+		});
+
+		children.forEach(function(child){
+			visited.push.apply(visited, child.preOrderTraversal());
+		});
+
+		return visited;
 	}
 
 	that.key = function(){
@@ -73,21 +100,12 @@ var TrieNode = function(key, value) {
 		return value;
 	}
 
-	that.children = function(){
-		return children;
-	}
-
 	Object.freeze(that);
 	return that;
 }
 
 
-
-/*
-Create root TrieNode, insert each element in the dictionary sequentially.
-*/
-
-var a = ["hello", "world"];
+var a = ["a", "to", "tea", "ted", "teds", "ten", "tennis", "i", "in", "inn"];
 var t = TrieNode(null);
 a.forEach(function(w){t.insert(w);});
-console.log(t.find("world").value());
+console.log(t.getMatchList("t"));
