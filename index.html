@@ -12,6 +12,7 @@
 
   <script src="./words.js" charset="utf-8"></script>
   <script src="./controller.js" charset="utf-8"></script>
+  <script src="./trie.js" charset="utf-8"></script>
   <script>
 
   	document.addEventListener('DOMContentLoaded', function () {
@@ -33,7 +34,7 @@
 	  // some random words from the dictionary. You'll want to populate
 	  // the list with the desired suggestions instead.
 	  CONTROLLER.registerAutocompleteListener(function (word) {
-
+	  	console.log(word);
 	  	// This function is called on _every_ keypress (that is,
 	  	// change to the search box). Modify this sample with your 
 	    // code to provide autocompletion suggestions.
