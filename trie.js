@@ -22,6 +22,10 @@ var TrieNode = function(key, value) {
 	that.insert = function(word, depth){
 		if (depth == null){depth = 0;}
 
+		if (word.length == depth){
+			if (key == word){value = 1;}
+		}
+
 		if (word.length > depth) {
 			// Search through the children nodes
 			var childrenValues = children.map(function(child){
@@ -30,6 +34,8 @@ var TrieNode = function(key, value) {
 
 			var targetWord = word.substring(0, depth + 1);
 			var index = childrenValues.indexOf(targetWord);
+			//console.log(targetWord);
+
 			if (index > -1){
 				// Insert the next character into this node
 
@@ -102,9 +108,6 @@ var TrieNode = function(key, value) {
 			visited.push(key);
 		}
 
-		// Though the words are presorted before being added to the Trie structure,
-		// there is an additional sort here in case a word is added later, to ensure
-		// that the tree traversal remains in lexographic order.
 		children.sort(function(a, b){
 			return a.key().localeCompare(b.key());
 		});
@@ -137,3 +140,4 @@ var TrieNode = function(key, value) {
 var a = ["am", "a"];
 var t = TrieNode(null);
 a.forEach(function(w){t.insert(w);});
+console.log(t.getMatchList("a"));

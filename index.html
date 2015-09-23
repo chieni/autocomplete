@@ -21,10 +21,6 @@
 	  // in the provided JSON dictionary (accessible as an array
 	  // stored in the variable 'WORDS') into the data structure.
 		var t = TrieNode(null);
-		
-		WORDS.sort(function(a, b){
-			return a.localeCompare(b);
-		});
 
 		WORDS.forEach(function(word){
 			t.insert(word);

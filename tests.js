@@ -51,12 +51,25 @@ QUnit.test( "Finding a under 10 matches", function( assert ) {
 });
 
 QUnit.test( "Finding over 10 matches", function( assert ) {
-	var a = ["a", "apple", "ant","after","aunt","always","able", "ample","awful", "ark", "army", "ape"];
+	var a = ["a", "apple", "ant","after","aunt","always","able", "ample","awful", "ark", "army", "ape", "amp"];
 	var t = TrieNode(null);
 	a.forEach(function(w){t.insert(w);});
 
 	var matchList = t.getMatchList("a", 10);
-	var expected = ["a", "able", "after", "always","ample", "ant", "ape", "apple", "ark", "army"];
+	var expected = ["a", "able", "after", "always", "amp", "ample", "ant", "ape", "apple", "ark"];
+
+  	matchList.forEach(function(word, i){
+		assert.ok(word == expected[i], "Passed!");
+	})
+});
+
+QUnit.test( "Finding matches that contain word parts within words", function( assert ) {
+	var a = ["ample", "amp","a"];
+	var t = TrieNode(null);
+	a.forEach(function(w){t.insert(w);});
+
+	var matchList = t.getMatchList("a", 10);
+	var expected = ["a", "amp", "ample"];
 
   	matchList.forEach(function(word, i){
 		assert.ok(word == expected[i], "Passed!");
