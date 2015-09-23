@@ -1,30 +1,15 @@
+/*-----------------------------------------------
+Trie Tests
+/*----------------------------------------------*/
+
 // insert tests
 QUnit.test( "Insert", function( assert ) {
 	var a = ["a", "to", "tea", "ted", "teds", "ten", "tennis", "i", "in", "inn"];
-	var t = TrieNode(null);
+	var t = Trie();
 	a.forEach(function(w){t.insert(w);});
 	var matchList = t.getMatchList("t", 10);
 
   	assert.ok( matchList[0] == "tea", "Passed!" );
-});
-
-// find tests
-QUnit.test( "Finding a TrieNode that does not exist", function( assert ) {
-	var a = ["a", "to", "tea", "ted", "teds", "ten", "tennis", "i", "in", "inn"];
-	var t = TrieNode(null);
-	a.forEach(function(w){t.insert(w);});
-
-  	assert.ok( t.find("nope") == null, "Passed!" );
-});
-
-QUnit.test( "Finding a TrieNode that does exist", function( assert ) {
-	var a = ["a", "to", "tea", "ted", "teds", "ten", "tennis", "i", "in", "inn"];
-	var t = TrieNode(null);
-	a.forEach(function(w){t.insert(w);});
-
-	var foundNode = t.find("tea");
-  	assert.ok( foundNode != null, "Passed!" );
-  	assert.ok(foundNode.key() == "tea", "Passed!");
 });
 
 // getMatchList tests
@@ -76,6 +61,27 @@ QUnit.test( "Finding matches that contain word parts within words", function( as
 	})
 });
 
+// find tests
+QUnit.test( "Finding a TrieNode that does not exist", function( assert ) {
+	var a = ["a", "to", "tea", "ted", "teds", "ten", "tennis", "i", "in", "inn"];
+	var t = TrieNode(null);
+	a.forEach(function(w){t.insert(w);});
+
+  	assert.ok( t.find("nope") == null, "Passed!" );
+});
+
+QUnit.test( "Finding a TrieNode that does exist", function( assert ) {
+	var a = ["a", "to", "tea", "ted", "teds", "ten", "tennis", "i", "in", "inn"];
+	var t = TrieNode(null);
+	a.forEach(function(w){t.insert(w);});
+
+	var foundNode = t.find("tea");
+  	assert.ok( foundNode != null, "Passed!" );
+  	assert.ok(foundNode.key() == "tea", "Passed!");
+});
+
+
+
 // preOrderTraversal tests
 QUnit.test( "Preorder traversal for empty Trie", function( assert ) {
 	var t = TrieNode(null);
@@ -112,3 +118,7 @@ QUnit.test( "Key for word", function( assert ) {
 	var t = TrieNode("hello");
   	assert.ok( t.key() == "hello", "Passed!" );
 });
+
+/*-----------------------------------------------
+TrieNode Tests
+/*----------------------------------------------*/

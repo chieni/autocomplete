@@ -12,6 +12,7 @@
 
   <script src="./words.js" charset="utf-8"></script>
   <script src="./controller.js" charset="utf-8"></script>
+  <script src ="./trienode.js" charset="utf-8"></script>
   <script src="./trie.js" charset="utf-8"></script>
   <script>
 
@@ -20,7 +21,7 @@
 	  // Instantiate your trie data type here, and load the words 
 	  // in the provided JSON dictionary (accessible as an array
 	  // stored in the variable 'WORDS') into the data structure.
-		var t = TrieNode(null);
+		var t = Trie();
 
 		WORDS.forEach(function(word){
 			t.insert(word);
