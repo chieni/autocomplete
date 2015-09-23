@@ -48,15 +48,7 @@
 
 	  	CONTROLLER.clearSearchResults();
 
-	  	// Display the current word
-	  	//CONTROLLER.appendToSearchResults(word);
-
-	  	// Display some random words
-	  	// for (i = 0; i < NUM_WORDS_TO_SHOW; ++i) {
-	  	//   randomWord = WORDS[Math.floor(Math.random() * WORDS.length)];
-	  	//   CONTROLLER.appendToSearchResults(randomWord);
-	  	// }
-	  	var matchList = t.getMatchList(word);
+	  	var matchList = t.getMatchList(word, NUM_WORDS_TO_SHOW);
 	  	if (matchList){
 		  	matchList.forEach(function(w){
 		  		CONTROLLER.appendToSearchResults(w)
