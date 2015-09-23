@@ -15,7 +15,7 @@ QUnit.test( "Insert", function( assert ) {
 // getMatchList tests
 QUnit.test( "Finding no matches", function( assert ) {
 	var a = ["a", "to", "tea", "ted", "teds", "ten", "tennis", "i", "in", "inn"];
-	var t = TrieNode(null);
+	var t = Trie();
 	a.forEach(function(w){t.insert(w);});
 
 	var matchList = t.getMatchList("nope");
@@ -24,7 +24,7 @@ QUnit.test( "Finding no matches", function( assert ) {
 
 QUnit.test( "Finding a under 10 matches", function( assert ) {
 	var a = ["a", "to", "tea", "ted", "teds", "ten", "tennis", "i", "in", "inn"];
-	var t = TrieNode(null);
+	var t = Trie();
 	a.forEach(function(w){t.insert(w);});
 
 	var matchList = t.getMatchList("t");
@@ -37,7 +37,7 @@ QUnit.test( "Finding a under 10 matches", function( assert ) {
 
 QUnit.test( "Finding over 10 matches", function( assert ) {
 	var a = ["a", "apple", "ant","after","aunt","always","able", "ample","awful", "ark", "army", "ape", "amp"];
-	var t = TrieNode(null);
+	var t = Trie();
 	a.forEach(function(w){t.insert(w);});
 
 	var matchList = t.getMatchList("a", 10);
@@ -50,7 +50,7 @@ QUnit.test( "Finding over 10 matches", function( assert ) {
 
 QUnit.test( "Finding matches that contain word parts within words", function( assert ) {
 	var a = ["ample", "amp","a"];
-	var t = TrieNode(null);
+	var t = Trie();
 	a.forEach(function(w){t.insert(w);});
 
 	var matchList = t.getMatchList("a", 10);
@@ -60,6 +60,9 @@ QUnit.test( "Finding matches that contain word parts within words", function( as
 		assert.ok(word == expected[i], "Passed!");
 	})
 });
+/*-----------------------------------------------
+TrieNode Tests
+/*----------------------------------------------*/
 
 // find tests
 QUnit.test( "Finding a TrieNode that does not exist", function( assert ) {
@@ -119,6 +122,4 @@ QUnit.test( "Key for word", function( assert ) {
   	assert.ok( t.key() == "hello", "Passed!" );
 });
 
-/*-----------------------------------------------
-TrieNode Tests
-/*----------------------------------------------*/
+
