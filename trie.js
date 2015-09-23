@@ -32,14 +32,15 @@ var TrieNode = function(key, value) {
 			var index = childrenValues.indexOf(targetWord);
 			if (index > -1){
 				// Insert the next character into this node
+
 				var nextNode = children[index];
-				nextNode.insert(word, depth + 1);
+				return nextNode.insert(word, depth + 1);
 			} else {
 				var val = null;
 				if (depth === word.length - 1) { val = 1;}
 				var nextNode = TrieNode(targetWord, val);
 				children.push(nextNode);
-				nextNode.insert(word, depth + 1);
+				return nextNode.insert(word, depth + 1);
 			}
 		}
 	}
@@ -101,6 +102,9 @@ var TrieNode = function(key, value) {
 			visited.push(key);
 		}
 
+		// Though the words are presorted before being added to the Trie structure,
+		// there is an additional sort here in case a word is added later, to ensure
+		// that the tree traversal remains in lexographic order.
 		children.sort(function(a, b){
 			return a.key().localeCompare(b.key());
 		});
@@ -130,8 +134,6 @@ var TrieNode = function(key, value) {
 	return that;
 }
 
-
-var a = ["a", "to", "tea", "ted", "teds", "ten", "tennis", "i", "in", "inn"];
+var a = ["am", "a"];
 var t = TrieNode(null);
 a.forEach(function(w){t.insert(w);});
-console.log(t.getMatchList("t", 10));
